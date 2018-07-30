@@ -1,26 +1,32 @@
 <template>
-  <div name="Datatable">
-    <div v-if="$slots.default || HeaderSettings" class="clearfix" style="margin-bottom: 10px">
-      <header-settings v-if="HeaderSettings" class="pull-right"
-        :columns="columns" :support-backup="supportBackup">
-      </header-settings>
-      <slot />
-    </div>
+    <div name="Datatable">
+        <div v-if="$slots.default || HeaderSettings" class="clearfix" style="margin-bottom: 10px">
+            <header-settings v-if="HeaderSettings" class="pull-right"
+                             :columns="columns" :support-backup="supportBackup">
+            </header-settings>
+            <slot/>
+        </div>
 
-    <tbl v-bind="$props" />
-    
-    <div v-if="Pagination" class="row" style="margin-top: 10px">
-      <div class="col-sm-6" style="white-space: nowrap">
-        <strong>
-          {{ $i18nForDatatable('Total') }} {{ total }} {{ $i18nForDatatable(',') }}
-        </strong>
-        <page-size-select :query="query" :page-size-options="pageSizeOptions" />
-      </div>
-      <div class="col-sm-6">
-        <pagination class="pull-right" :total="total" :query="query" />
-      </div>
+        <tbl v-bind="$props"/>
+
+        <div v-if="Pagination" class="row" style="margin-top: 10px">
+            <div class="col-sm-6" style="white-space: nowrap">
+                <strong>
+                    <!--{{ $i18nForDatatable('Total') }} {{ total }} {{ $i18nForDatatable(',') }}-->
+                    {{ getPageInfo }}
+                </strong>
+                <pagination-text :total="total" :query="query" :pagination-info-text="paginationInfoText"/>
+                <page-size-select :query="query"
+                                  :page-size-options="pageSizeOptions"
+                                  :pagination-selector-after-text="paginationSelectorAfterText"
+                                  :pagination-selector-before-text="paginationSelectorBeforeText"/>
+            </div>
+            <div class="col-sm-6">
+                <pagination class="pull-right" :total="total" :query="query" :previous-text="previousText"
+                            :next-text="nextText"/>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 <script>
 import HeaderSettings from './HeaderSettings/index.vue'
@@ -28,20 +34,23 @@ import Tbl from './Table/index.vue'
 import Pagination from './Pagination.vue'
 import PageSizeSelect from './PageSizeSelect.vue'
 import props from './_mixins/props'
+import PaginationText from './PaginationText.vue'
 
 export default {
   name: 'Datatable',
   mixins: [props],
-  components: { HeaderSettings, Tbl, Pagination, PageSizeSelect },
-  created () {
+  components: {HeaderSettings, Tbl, Pagination, PageSizeSelect, PaginationText},
+  created() {
     // init query (make all the properties observable by using `$set`)
-    const q = { limit: 10, offset: 0, sort: '', order: '', ...this.query }
-    Object.keys(q).forEach(key => { this.$set(this.query, key, q[key]) })
+    const q = {limit: 10, offset: 0, sort: '', order: '', ...this.query}
+    Object.keys(q).forEach(key => {
+      this.$set(this.query, key, q[key])
+    })
   },
   watch: {
     data: {
-      handler (data) {
-        const { supportNested } = this
+      handler(data) {
+        const {supportNested} = this
         // support nested components feature with extra magic
         if (supportNested) {
           const MAGIC_FIELD = '__nested__'
@@ -50,7 +59,7 @@ export default {
               this.$set(item, MAGIC_FIELD, {
                 comp: undefined, // current nested component
                 visible: false,
-                $toggle (comp, visible) {
+                $toggle(comp, visible) {
                   switch (arguments.length) {
                     case 0:
                       this.visible = !this.visible
@@ -87,10 +96,10 @@ export default {
                       }
                     })
                   },
-                  { deep: true }
+                  {deep: true}
                 )
               }
-              Object.defineProperty(item, MAGIC_FIELD, { enumerable: false })
+              Object.defineProperty(item, MAGIC_FIELD, {enumerable: false})
             }
           })
         }
@@ -101,11 +110,12 @@ export default {
 }
 </script>
 <style>
-/* transition effect: fade */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s;
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0;
-}
+    /* transition effect: fade */
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .2s;
+    }
+
+    .fade-enter, .fade-leave-active {
+        opacity: 0;
+    }
 </style>

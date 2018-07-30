@@ -4,6 +4,7 @@ export default {
     data: { type: Array, required: true }, // rows
     total: { type: Number, required: true },
     query: { type: Object, required: true },
+    paginationInfoText: { type: String, default: 'Total' },
     selection: Array, // container for multi-select
     summary: Object, // an extra summary row
     xprops: Object, // extra custom props carrier passed to dynamic components
@@ -14,7 +15,12 @@ export default {
     tblStyle: [String, Object, Array], // inline styles for <table>
     fixHeaderAndSetBodyMaxHeight: Number, // a fancy prop which combines two props into one
     supportNested: [Boolean, String], // support nested components feature (String is only for 'accordion')
-    supportBackup: Boolean // support backup for `HeaderSettings`
+    supportBackup: Boolean, // support backup for `HeaderSettings`,
+    paginationSelectorAfterText: {type: String, default: 'items / page'},
+    paginationSelectorBeforeText: {type: String, default: ''},
+    previousText: {type: String, default: 'Previous'},
+    nextText: {type: String, default: 'Next'},
+    horizontalScroll: {type: Boolean, default: false}
   },
   data () {
     let datatableInstance = this
