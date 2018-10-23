@@ -21,12 +21,12 @@ export default {
 }
 </script>
 <style>
-    .-page-size-select {
-        display: inline-block;
-        width: 65px;
-    }
+.-page-size-select {
+  display: inline-block;
+  width: 65px;
+}
 
-    .-page-size-label-before {
-        padding-left: 10px;
-    }
+.-page-size-label-before {
+  padding-left: 10px;
+}
 </style>

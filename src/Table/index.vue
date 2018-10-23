@@ -101,57 +101,35 @@ export default {
 }
 </script>
 <style>
-.-complex - table
-{
+.-complex-table {
   position: relative;
 }
 
-.-complex - table
-table
-{
-  background: #
-  fff;
+.-complex-table table {
+  background: #fff;
 }
 
-.-table - header,
-.-table - body,
-.-table - footer
-{
+.-table-header,
+.-table-body,
+.-table-footer {
   position: relative;
   overflow: scroll;
 }
 
-.-fixed - table
-{
+.-fixed-table {
   position: absolute;
   top: 0;
 }
 
-.-fixed - table
-table
-{
+.-fixed-table table {
   width: auto;
 }
 
-.-left - fixed
-{
-  box - shadow
-:
-  1
-  px
-  0
-  5
-  px #ddd;
+.-left-fixed {
+  box-shadow: 1px 0 5px #ddd;
 }
 
-.-right - fixed
-{
-  box - shadow
-:
-  1
-  px
-  0
-  5
-  px #ddd;
+.-right-fixed {
+  box-shadow: 1px 0 5px #ddd;
 }
 </style>

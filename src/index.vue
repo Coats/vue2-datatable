@@ -110,12 +110,12 @@ export default {
 }
 </script>
 <style>
-    /* transition effect: fade */
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .2s;
-    }
+/* transition effect: fade */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
 
-    .fade-enter, .fade-leave-active {
-        opacity: 0;
-    }
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
 </style>
