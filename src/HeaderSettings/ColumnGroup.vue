@@ -3,7 +3,7 @@
     <label class="-col-group-title">
       {{ groupName === 'undefined' ? 'Columns' : groupName }}
     </label>
-    <li v-for="(col, idx) in columns">
+    <li v-for="(col, idx) in columns" v-if="col.visibilityToggleLock !== true">
       <input
         type="checkbox"
         :id="uuidGen(col.field || idx)"
