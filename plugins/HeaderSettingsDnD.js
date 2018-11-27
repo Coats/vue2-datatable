@@ -61,7 +61,7 @@ export default function dnd(vm) {
     $TheadContainer.find('th').each(function() {
       let $this = $(this)
 
-      let textValue = $this.text().trim();
+      let textValue = $this.text().trim()
       let index = columns.findIndex(function(el) {
         return el.title === textValue
       })
@@ -150,10 +150,7 @@ export default function dnd(vm) {
 
 // similar to https://github.com/sindresorhus/array-move
 function arrMove(arr, from, to) {
-  /*let index = (from < to ? to - 1 : to)
-  let itemToMove = arr.splice(from, 1)[0]
-  arr.splice(index, 0, itemToMove)*/
-    arr.splice((from < to ? to - 1 : to), 0, arr.splice(from, 1)[0])
+  arr.splice((from < to ? to - 1 : to), 0, arr.splice(from, 1)[0])
 }
 
 $('head').append(`<style>
