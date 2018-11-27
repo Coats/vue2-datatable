@@ -6,6 +6,7 @@
 </template>
 <script>
 import mockData from '../_mockData'
+import dnd from '../../../plugins/HeaderSettingsDnD'
 
 export default {
   data: () => ({
@@ -20,6 +21,9 @@ export default {
     total: 0,
     query: {}
   }),
+  mounted () {
+    dnd(this)
+  },
   watch: {
     query: {
       handler (query) {
